@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rafa Tattoo | Full Color, Anime e Geek</title>
+  <meta name="description" content="Site oficial da Rafa Tattoo. Tatuagens full color, anime e geek com atendimento em Porto Alegre e agenda em São Paulo." />
+  <style>
+    :root {
+      --bg: #0b0b12;
+      --bg-soft: #12131c;
+      --card: rgba(255,255,255,0.06);
+      --card-border: rgba(255,255,255,0.12);
+      --text: #f5f7fb;
+      --muted: #b8bfd3;
+      --pink: #ff4fa3;
+      --purple: #8b5cf6;
+      --cyan: #22d3ee;
+      --yellow: #facc15;
+      --shadow: 0 20px 50px rgba(0,0,0,0.35);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(139,92,246,.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,79,163,.16), transparent 28%),
+        radial-gradient(circle at bottom center, rgba(34,211,238,.10), transparent 32%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .blur-orb {
+      position: fixed;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      filter: blur(90px);
+      opacity: 0.16;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb-1 { background: var(--pink); top: 2%; left: -6%; }
+    .orb-2 { background: var(--purple); top: 26%; right: -8%; }
+    .orb-3 { background: var(--cyan); bottom: 8%; left: 25%; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(11,11,18,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--pink), var(--purple), var(--cyan));
+      box-shadow: 0 12px 24px rgba(139,92,246,.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border: 2px solid rgba(255,255,255,0.9);
+      border-radius: 10px;
+      transform: rotate(12deg);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .cta-btn,
+    .ghost-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: .25s ease;
+      border: 1px solid transparent;
+    }
+
+    .cta-btn {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      box-shadow: 0 14px 28px rgba(139,92,246,.24);
+    }
+
+    .cta-btn:hover { transform: translateY(-2px) scale(1.01); }
+
+    .ghost-btn {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.12);
+      color: var(--text);
+    }
+
+    .ghost-btn:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+    }
+
+    main { position: relative; z-index: 1; }
+
+    .hero {
+      padding: 92px 0 46px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #d7def0;
+      margin-bottom: 18px;
+      font-size: .92rem;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 14px rgba(250,204,21, .7);
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 6vw, 5.1rem);
+      line-height: .96;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff, #f9a8d4, #a78bfa, #67e8f9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 620px;
+      margin-bottom: 26px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 620px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 22px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.55rem;
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 22px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,79,163,.14), transparent 30%, rgba(34,211,238,.08));
+      pointer-events: none;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 560px;
+      border-radius: 26px;
+      overflow: hidden;
+      background:
+        linear-gradient(160deg, rgba(255,79,163,.18), rgba(139,92,246,.1)),
+        url('https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=1200&q=80') center/cover;
+      display: flex;
+      align-items: flex-end;
+      padding: 24px;
+    }
+
+    .floating-card {
+      width: min(100%, 310px);
+      border-radius: 24px;
+      padding: 18px;
+      background: rgba(11,11,18,0.82);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(10px);
+    }
+
+    .floating-card small {
+      color: #c7d2fe;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: .75rem;
+    }
+
+    .floating-card h3 {
+      margin: 10px 0 8px;
+      font-size: 1.35rem;
+    }
+
+    .floating-card p {
+      margin: 0;
+      font-size: .95rem;
+    }
+
+    section {
+      padding: 42px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 22px;
+      margin-bottom: 26px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      letter-spacing: -1px;
+    }
+
+    .section-heading p {
+      max-width: 560px;
+      color: var(--muted);
+    }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .info-card,
+    .portfolio-item,
+    .contact-card,
+    .testimonial,
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .info-card {
+      padding: 24px;
+    }
+
+    .info-card .icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      font-size: 1.3rem;
+      background: linear-gradient(135deg, rgba(255,79,163,.18), rgba(139,92,246,.18));
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .info-card h3 { margin-bottom: 10px; font-size: 1.2rem; }
+    .info-card p { color: var(--muted); }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .portfolio-item {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .portfolio-thumb {
+      height: 340px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .portfolio-thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 20%, rgba(11,11,18,.88));
+    }
+
+    .portfolio-content {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 24px;
+      z-index: 2;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: .78rem;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #f7d4e8;
+    }
+
+    .portfolio-content h3 { margin-bottom: 8px; }
+    .portfolio-content p { color: #d8def0; font-size: .95rem; }
+
+    .process {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .process .info-card { min-height: 100%; }
+
+    .testimonial-wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .testimonial {
+      padding: 24px;
+    }
+
+    .testimonial p {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .testimonial strong { display: block; }
+    .testimonial span { color: #cbd5e1; font-size: .92rem; }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .contact-card {
+      padding: 28px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .contact-item span,
+    .contact-item a,
+    .contact-card p { color: var(--muted); }
+
+    .mini-panel {
+      display: grid;
+      gap: 14px;
+      align-content: space-between;
+    }
+
+    .faq {
+      display: grid;
+      gap: 14px;
+    }
+
+    .faq-item {
+      padding: 20px 22px;
+    }
+
+    .faq-item h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .faq-item p { color: var(--muted); }
+
+    footer {
+      padding: 28px 0 44px;
+      color: var(--muted);
+    }
+
+    .footer-box {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap;
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 10px 12px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .cards-3,
+      .portfolio-grid,
+      .testimonial-wrap,
+      .process,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual { min-height: 460px; }
+      .hero-stats { grid-template-columns: 1fr; }
+
+      .nav-links {
+        position: absolute;
+        top: 78px;
+        left: 16px;
+        right: 16px;
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 18px;
+        border-radius: 22px;
+        background: rgba(11,11,18,0.96);
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .nav-links.open { display: flex; }
+      .mobile-toggle { display: inline-flex; }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding-top: 70px; }
+      .hero-card { padding: 16px; }
+      .hero-visual { min-height: 400px; padding: 16px; }
+      .portfolio-thumb { height: 300px; }
+      h1 { letter-spacing: -1px; }
+      .section-heading { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blur-orb orb-1"></div>
+  <div class="blur-orb orb-2"></div>
+  <div class="blur-orb orb-3"></div>
+
+  <header>
+    <div class="container nav">
+      <a href="#inicio" class="brand">
+        <span class="brand-mark"></span>
+        <span>Rafa Tattoo</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#sobre">Sobre</a>
+        <a href="#estilos">Estilos</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#processo">Processo</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <div style="display:flex; align-items:center; gap:10px;">
+        <a class="cta-btn" href="https://www.instagram.com/rafatattoo_oficial/" target="_blank" rel="noopener noreferrer">Agendar pelo Instagram</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Full color • Anime • Geek</div>
+          <h1>
+            Tatuagens com <span class="gradient-text">personalidade, cor e presença</span>
+          </h1>
+          <p>
+            Um site moderno para apresentar o trabalho da Rafa, valorizar artes autorais e transformar visitas em agendamentos. Ideal para destacar flashes, projetos exclusivos e o estilo marcante de tattoos inspiradas no universo geek e anime.
+          </p>
+
+          <div class="hero-actions">
+            <a class="cta-btn" href="https://www.instagram.com/rafatattoo_oficial/" target="_blank" rel="noopener noreferrer">Ver Instagram</a>
+            <a class="ghost-btn" href="#portfolio">Explorar trabalhos</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>Full Color</strong>
+              <span>Composição vibrante e acabamento marcante.</span>
+            </div>
+            <div class="stat">
+              <strong>Anime & Geek</strong>
+              <span>Projetos inspirados em personagens, games e cultura pop.</span>
+            </div>
+            <div class="stat">
+              <strong>Atendimento</strong>
+              <span>Porto Alegre com agenda aberta também em São Paulo.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-visual">
+            <div class="floating-card">
+              <small>Arte na pele</small>
+              <h3>Projetos únicos com estética forte</h3>
+              <p>
+                Criação de tattoos autorais, releituras e flashes com foco em cor, identidade e impacto visual.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <h2>Sobre a artista</h2>
+          </div>
+          <p>
+            A proposta aqui é transmitir uma marca pessoal mais premium, criativa e memorável, saindo do visual genérico de estúdio e aproximando a cliente ideal que já se identifica com o estilo da Rafa.
+          </p>
+        </div>
+
+        <div class="cards-3">
+          <article class="info-card">
+            <div class="icon">🎨</div>
+            <h3>Assinatura visual</h3>
+            <p>
+              Layout com cores neon, base escura e elementos modernos para combinar com tattoos de anime, personagens, games e artes cheias de expressão.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="icon">⚡</div>
+            <h3>Conversão em foco</h3>
+            <p>
+              Botões de agendamento bem visíveis, prova social, destaques de estilo e apresentação clara do processo para facilitar o primeiro contato.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="icon">✨</div>
+            <h3>Experiência premium</h3>
+            <p>
+              Estrutura pensada para valorizar o portfólio e passar mais profissionalismo, elevando a percepção de valor antes mesmo da conversa no direct.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="estilos">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <h2>Estilos em destaque</h2>
+          </div>
+          <p>
+            O site pode destacar as categorias mais fortes do perfil para direcionar melhor quem chega até ela e já filtrar o tipo de cliente ideal.
+          </p>
+        </div>
+
+        <div class="cards-3">
+          <article class="info-card">
+            <div class="icon">🌈</div>
+            <h3>Full Color</h3>
+            <p>
+              Tattoos com contraste, saturação e presença visual forte para quem quer uma peça viva e impactante.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="icon">🗡️</div>
+            <h3>Anime</h3>
+            <p>
+              Personagens, cenas e referências que carregam emoção, nostalgia e identidade para fãs de anime e mangá.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="icon">🎮</div>
+            <h3>Geek</h3>
+            <p>
+              Games, filmes, séries, HQs e cultura pop transformados em tattoos autorais e muito bem resolvidas visualmente.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <h2>Portfólio em evidência</h2>
+          </div>
+          <p>
+            Aqui entram fotos reais dos trabalhos dela. Neste protótipo usei imagens de apoio, mas a seção já está pronta para receber as tattoos do Instagram.
+          </p>
+        </div>
+
+        <div class="portfolio-grid">
+          <article class="portfolio-item">
+            <div class="portfolio-thumb" style="background-image:url('https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="portfolio-content">
+              <div class="tag-row">
+                <span class="tag">Anime</span>
+                <span class="tag">Colorida</span>
+              </div>
+              <h3>Personagens icônicos</h3>
+              <p>Espaço perfeito para tattoos inspiradas em universos como Demon Slayer, Jujutsu Kaisen, Naruto e outros.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-item">
+            <div class="portfolio-thumb" style="background-image:url('https://images.unsplash.com/photo-1542727365-19732fc92dfb?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="portfolio-content">
+              <div class="tag-row">
+                <span class="tag">Geek</span>
+                <span class="tag">Games</span>
+              </div>
+              <h3>Referências pop</h3>
+              <p>Ideal para artes de Pokémon, games, filmes e símbolos que contam histórias pessoais e afetivas.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-item">
+            <div class="portfolio-thumb" style="background-image:url('https://images.unsplash.com/photo-1536924940846-227afb31e2a5?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="portfolio-content">
+              <div class="tag-row">
+                <span class="tag">Flash</span>
+                <span class="tag">Exclusivo</span>
+              </div>
+              <h3>Projetos sob medida</h3>
+              <p>Seção pensada para divulgar flashes disponíveis, desenhos autorais e projetos personalizados por orçamento.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="processo">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <h2>Como funciona o agendamento</h2>
+          </div>
+          <p>
+            Explicar o processo no site ajuda a filtrar dúvidas repetidas e deixa a conversa no direct mais objetiva e profissional.
+          </p>
+        </div>
+
+        <div class="process">
+          <article class="info-card">
+            <div class="icon">1</div>
+            <h3>Envio da ideia</h3>
+            <p>
+              A cliente entra em contato, manda referências, tamanho aproximado, local do corpo e cidade para atendimento.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="icon">2</div>
+            <h3>Orçamento e proposta</h3>
+            <p>
+              Com base no estilo e complexidade, é apresentado o valor, disponibilidade e direcionamento criativo do projeto.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="icon">3</div>
+            <h3>Reserva da agenda</h3>
+            <p>
+              Após alinhamento, a sessão é reservada e a cliente recebe as orientações prévias para chegar preparada.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="icon">4</div>
+            <h3>Dia da tattoo</h3>
+            <p>
+              Atendimento com experiência mais exclusiva, foco em conforto, resultado final e um trabalho pensado para durar bonito.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <h2>Depoimentos</h2>
+          </div>
+          <p>
+            Você pode substituir estes textos por prints reais ou avaliações de clientes para aumentar ainda mais a confiança.
+          </p>
+        </div>
+
+        <div class="testimonial-wrap">
+          <article class="testimonial">
+            <p>“A arte ficou ainda mais linda do que eu imaginava. Atendimento super cuidadoso e resultado impecável.”</p>
+            <strong>Cliente satisfeita</strong>
+            <span>Tattoo full color</span>
+          </article>
+
+          <article class="testimonial">
+            <p>“Conseguiu transformar uma referência de anime em algo totalmente meu. Ficou perfeito no braço.”</p>
+            <strong>Cliente geek</strong>
+            <span>Projeto autoral</span>
+          </article>
+
+          <article class="testimonial">
+            <p>“Além do traço lindo, todo o processo foi muito tranquilo. Passa muita confiança e profissionalismo.”</p>
+            <strong>Primeira tattoo</strong>
+            <span>Experiência completa</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container contact">
+        <article class="contact-card">
+          <div class="section-heading" style="margin-bottom:0;">
+            <div>
+              <h2>Vamos tirar sua ideia do papel?</h2>
+            </div>
+          </div>
+          <p>
+            Um site assim pode funcionar como cartão de visitas premium, centralizando estilo, portfólio e contato em um só lugar.
+          </p>
+
+          <div class="contact-list">
+            <div class="contact-item">
+              <div>📍</div>
+              <div>
+                <strong>Atendimento</strong>
+                <span>Porto Alegre • agenda aberta em São Paulo</span>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div>📲</div>
+              <div>
+                <strong>Instagram</strong>
+                <a href="https://www.instagram.com/rafatattoo_oficial/" target="_blank" rel="noopener noreferrer">@rafatattoo_oficial</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div>💬</div>
+              <div>
+                <strong>Orçamentos</strong>
+                <span>Via Instagram ou WhatsApp, com resposta mais organizada e profissional.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a class="cta-btn" href="https://www.instagram.com/rafatattoo_oficial/" target="_blank" rel="noopener noreferrer">Chamar no Instagram</a>
+            <a class="ghost-btn" href="#inicio">Voltar ao topo</a>
+          </div>
+        </article>
+
+        <aside class="mini-panel">
+          <article class="faq-item">
+            <h3>Esse layout serve para tráfego pago?</h3>
+            <p>Sim. A estrutura já é boa para anunciar no Instagram e levar a pessoa para uma página mais profissional.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Dá para colocar galeria real do Instagram?</h3>
+            <p>Sim. Posso trocar as imagens de apoio por fotos reais das tattoos e deixar tudo mais fiel ao trabalho dela.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Dá para adicionar WhatsApp?</h3>
+            <p>Sim. É só me passar o número que eu deixo todos os botões levando direto para o WhatsApp.</p>
+          </article>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-box">
+      <span>© 2026 Rafa Tattoo. Todos os direitos reservados.</span>
+      <span>Protótipo visual criado para apresentação do trabalho artístico.</span>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('mobileToggle');
+    const nav = document.getElementById('navLinks');
+
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('open');
+    });
+
+    document.querySelectorAll('#navLinks a').forEach(link => {
+      link.addEventListener('click', () => nav.classList.remove('open'));
+    });
+  </script>
+</body>
+</html>
